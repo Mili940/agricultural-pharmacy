@@ -1,0 +1,36 @@
+li {
+list-style: none;
+}
+
+.h1 {
+    color: $steel;
+    font-size: 25px;
+}
+
+.navbar {
+    padding: 0.5rem 0;
+}
+
+%button {
+    width: 200px;
+    padding: 10px 0;
+    border-radius: 5px;
+}
+
+.btn-confirm {
+    @extend %button;
+    background-color: $green;
+    color: $white;
+}
+
+.btn-delete {
+    @extend %button;
+    background-color: $red;
+    color: $white;
+}
+
+.btn-edit {
+    @extend %button;
+    background-color: $orange;
+    color: $white;
+}
