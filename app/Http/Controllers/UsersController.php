@@ -10,7 +10,8 @@ class UsersController extends Controller
 {
     public function index()
     {
-        $users = User::all()->sortBy('name');
+        $users = User::all()->sortBy('last_name');
+//          $users = User::all()->where('id', '3');
 
         return view('users.index', compact('users'));
 
