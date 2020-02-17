@@ -4,7 +4,7 @@
     <div>
         <h1 class="h1 my-4">Kupci</h1>
         @foreach($users as $user)
-            <li>
+            <li class="user-li">
                 <a href="/users/{{$user->id}}">
                    {{ $user->last_name}}  {{ $user->name }}
                 </a>

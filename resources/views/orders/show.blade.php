@@ -27,7 +27,6 @@
                     <td>{{$product->pivot->price}}</td>
                     <td>{{$product->pivot->subtotal}}</td>
                 </tr>
-
             @endforeach
             </tbody>
         </table>

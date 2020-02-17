@@ -1,9 +1,22 @@
 <template>
     <div>
-        <div class="flex justify-between">
+        <div class="flex justify-between items-center">
             <div class="flex flex-col mb-3">
                 <label>Cena Porudzbine:</label>
                 <input class="input" v-model.number="total" type="number" name="price_order" placeholder="Cena porudzbine RSD">
+            </div>
+            <div class="flex flex-col mb-3">
+                <label>Placeno:</label>
+                <div>
+                    <label class="radio">
+                        <input type="radio" name="payed" value="1">
+                        Da
+                    </label>
+                    <label class="radio">
+                        <input type="radio" name="payed" value="0">
+                        Ne
+                    </label>
+                </div>
             </div>
             <div class="flex justify-end my-10">
                 <a @click="addItem" class="btn-confirm text-white flex items-center justify-center cursor-pointer">Novi preparat</a>

@@ -39,7 +39,7 @@ class OrdersController extends Controller
             $order = new Order();
 
             $order->price_order = request('price_order');
-//        $order->payed = request('payed');
+            $order->payed = request('payed');
             $order->note = request('note');
             $order->user_id = request('user_id');
             $order->save();
