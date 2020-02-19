@@ -1953,6 +1953,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     products: {
@@ -42602,7 +42615,7 @@ var render = function() {
   return _c(
     "div",
     [
-      _c("div", { staticClass: "flex justify-between" }, [
+      _c("div", { staticClass: "flex justify-between items-center" }, [
         _c("div", { staticClass: "flex flex-col mb-3" }, [
           _c("label", [_vm._v("Cena Porudzbine:")]),
           _vm._v(" "),
@@ -42636,6 +42649,8 @@ var render = function() {
             }
           })
         ]),
+        _vm._v(" "),
+        _vm._m(0),
         _vm._v(" "),
         _c("div", { staticClass: "flex justify-end my-10" }, [
           _c(
@@ -42836,7 +42851,28 @@ var render = function() {
     2
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "flex flex-col mb-3" }, [
+      _c("label", [_vm._v("Placeno:")]),
+      _vm._v(" "),
+      _c("div", [
+        _c("label", { staticClass: "radio" }, [
+          _c("input", { attrs: { type: "radio", name: "payed", value: "1" } }),
+          _vm._v("\n                    Da\n                ")
+        ]),
+        _vm._v(" "),
+        _c("label", { staticClass: "radio" }, [
+          _c("input", { attrs: { type: "radio", name: "payed", value: "0" } }),
+          _vm._v("\n                    Ne\n                ")
+        ])
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 
