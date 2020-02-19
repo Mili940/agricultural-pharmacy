@@ -19,9 +19,9 @@ class PDFController extends Controller
     }
 
 
-    function pdf()
+    function pdf($id)
     {
-        $user = User::with('orders')->find(auth()->id());
+        $user = User::with('orders')->find($id);
         $orders = $user->orders;
 
         $pdf = App::make('dompdf.wrapper');
