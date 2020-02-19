@@ -24,6 +24,9 @@
             </a>
         @endforeach
     </div>
+    <div>
+        <a href="/users/{{$user->id}}/pdf" target="_blank">Priprema za stampu</a>
+    </div>
     <div class="my-10">
         <h1 class="h1">Ukupno:</h1>
         <table>
@@ -34,13 +37,11 @@
             </tr>
             </thead>
             <tbody>
-                @foreach($user->orders as $order)
-                    @foreach($order->products as $product)
-                        <tr class="{{ $order->payed ? 'payed-true' : '' }}">
-                            <td>{{ $product->name }}</td>
-                            <td>{{$product->pivot->quantity}}</td>
-                        </tr>
-                    @endforeach
+                @foreach($products as $product)
+                    <tr>
+                        <td>{{$product->name}}</td>
+                        <td>{{$product->qty}}</td>
+                    </tr>
                 @endforeach
             </tbody>
         </table>
