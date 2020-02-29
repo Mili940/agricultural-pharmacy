@@ -22,10 +22,9 @@ class CreateProductsTable extends Migration
             $table->unsignedInteger('order_id');
             $table->unsignedInteger('product_id');
             $table->unsignedSmallInteger('quantity');
-            $table->unsignedSmallInteger('price');
+            $table->unsignedSmallInteger('price')->nullable();
+            $table->unsignedSmallInteger('subtotal')->nullable();
             $table->timestamps();
-
-            $table->unique(['order_id', 'product_id']);
         });
     }
 

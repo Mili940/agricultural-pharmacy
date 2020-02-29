@@ -3,17 +3,17 @@
         <div class="flex justify-between items-center">
             <div class="flex flex-col mb-3">
                 <label>Cena Porudzbine:</label>
-                <input class="input" v-model.number="total" type="number" name="price_order" placeholder="Cena porudzbine RSD">
+                <input class="input" v-model="order.price_order"  type="number" name="price_order" placeholder="Cena porudzbine RSD">
             </div>
             <div class="flex flex-col mb-3">
                 <label>Placeno:</label>
                 <div>
                     <label class="radio">
-                        <input type="radio" name="payed" value="1">
+                        <input type="radio" v-model="order.payed" name="payed" value="1">
                         Da
                     </label>
                     <label class="radio">
-                        <input type="radio" name="payed" value="0">
+                        <input type="radio" v-model="order.payed" name="payed" value="0">
                         Ne
                     </label>
                 </div>
@@ -22,27 +22,34 @@
                 <a @click="addItem" class="btn-confirm text-white flex items-center justify-center cursor-pointer">Novi preparat</a>
             </div>
         </div>
-        <div  v-for="(item, i) in items" :key="i" v-model="item.value" class="flex justify-between items-center mb-8">
+        <div  v-for="(orderProduct, i) in order.products" :key="i" class="flex justify-between items-center mb-8">
             <div class="flex flex-col">
                 <label>Preparat:</label>
                 <select
                     name="product[]"
                     class="input-select"
                 >
-                    <option v-for="product in products" :key="product.id" :value="product.id">{{ product.name }}</option>
+                    <option
+                        v-for="product in products"
+                        :key="product.id"
+                        :value="product.id"
+                        :selected="product.id === orderProduct.id"
+                    >
+                        {{ product.name }}
+                    </option>
                 </select>
             </div>
             <div class="flex flex-col">
                 <label>Kolicina:</label>
-                <input v-model.number="item.quantity" class="input" type="text" name="quantity[]" placeholder="Kolicina">
+                <input v-model.number="orderProduct.pivot.quantity" class="input" type="text" name="quantity[]" placeholder="Kolicina">
             </div>
             <div class="flex flex-col">
                 <label>Cena:</label>
-                <input v-model.number="item.price" class="input" type="number" name="price[]" value="" placeholder="Cena RSD">
+                <input v-model.number="orderProduct.pivot.price" class="input" type="number" name="price[]" value="" placeholder="Cena RSD">
             </div>
             <div class="flex flex-col">
                 <label>Ukupna cena preparata:</label>
-                <input class="input" type="number" v-model.number="subtotal[i]" name="subtotal[]">
+                <input class="input" type="number" v-model.number="orderProduct.pivot.subtotal" name="subtotal[]">
             </div>
             <div
                 v-tooltip="lastItems ? 'Cant delete': ''"
@@ -62,9 +69,14 @@
             products: {
                 type: Array,
                 default: () => [],
+            },
+            inputOrder: {
+                type: Object,
+                default: () => {},
             }
         },
         data: () => ({
+            order: {},
             items: [{
                 value: '',
                 price: '',
@@ -86,6 +98,9 @@
                 }, 0);
             },
         },
+        mounted() {
+            this.setOrder()
+        },
         methods: {
             addItem(index) {
                 this.items.push({
@@ -97,6 +112,9 @@
                     this.items.splice(index, 1)
                 }
             },
+            setOrder() {
+                this.order = this.inputOrder
+            }
         }
     }
 </script>

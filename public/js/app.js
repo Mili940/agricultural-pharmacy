@@ -1942,18 +1942,61 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['note', 'name', 'id', 'cena', 'kolicina'],
+  props: {
+    products: {
+      type: Array,
+      "default": function _default() {
+        return [];
+      }
+    }
+  },
   data: function data() {
     return {
       items: [{
-        value: ''
+        value: '',
+        price: '',
+        quantity: ''
       }]
     };
   },
   computed: {
     lastItems: function lastItems() {
       return !(this.items.length - 1);
+    },
+    subtotal: function subtotal() {
+      return this.items.map(function (item) {
+        return Number(item.price * item.quantity);
+      });
+    },
+    total: function total() {
+      return this.items.reduce(function (total, item) {
+        return total + item.price * item.quantity;
+      }, 0);
     }
   },
   methods: {
@@ -42572,6 +42615,56 @@ var render = function() {
   return _c(
     "div",
     [
+      _c("div", { staticClass: "flex justify-between items-center" }, [
+        _c("div", { staticClass: "flex flex-col mb-3" }, [
+          _c("label", [_vm._v("Cena Porudzbine:")]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model.number",
+                value: _vm.total,
+                expression: "total",
+                modifiers: { number: true }
+              }
+            ],
+            staticClass: "input",
+            attrs: {
+              type: "number",
+              name: "price_order",
+              placeholder: "Cena porudzbine RSD"
+            },
+            domProps: { value: _vm.total },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.total = _vm._n($event.target.value)
+              },
+              blur: function($event) {
+                return _vm.$forceUpdate()
+              }
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _vm._m(0),
+        _vm._v(" "),
+        _c("div", { staticClass: "flex justify-end my-10" }, [
+          _c(
+            "a",
+            {
+              staticClass:
+                "btn-confirm text-white flex items-center justify-center cursor-pointer",
+              on: { click: _vm.addItem }
+            },
+            [_vm._v("Novi preparat")]
+          )
+        ])
+      ]),
+      _vm._v(" "),
       _vm._l(_vm.items, function(item, i) {
         return _c(
           "div",
@@ -42592,14 +42685,116 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "select",
-                { staticClass: "input-select", attrs: { name: "product" } },
-                [_c("option", [_vm._v(_vm._s(_vm.name))])]
+                { staticClass: "input-select", attrs: { name: "product[]" } },
+                _vm._l(_vm.products, function(product) {
+                  return _c(
+                    "option",
+                    { key: product.id, domProps: { value: product.id } },
+                    [_vm._v(_vm._s(product.name))]
+                  )
+                }),
+                0
               )
             ]),
             _vm._v(" "),
-            _vm._m(0, true),
+            _c("div", { staticClass: "flex flex-col" }, [
+              _c("label", [_vm._v("Kolicina:")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model.number",
+                    value: item.quantity,
+                    expression: "item.quantity",
+                    modifiers: { number: true }
+                  }
+                ],
+                staticClass: "input",
+                attrs: {
+                  type: "text",
+                  name: "quantity[]",
+                  placeholder: "Kolicina"
+                },
+                domProps: { value: item.quantity },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(item, "quantity", _vm._n($event.target.value))
+                  },
+                  blur: function($event) {
+                    return _vm.$forceUpdate()
+                  }
+                }
+              })
+            ]),
             _vm._v(" "),
-            _vm._m(1, true),
+            _c("div", { staticClass: "flex flex-col" }, [
+              _c("label", [_vm._v("Cena:")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model.number",
+                    value: item.price,
+                    expression: "item.price",
+                    modifiers: { number: true }
+                  }
+                ],
+                staticClass: "input",
+                attrs: {
+                  type: "number",
+                  name: "price[]",
+                  value: "",
+                  placeholder: "Cena RSD"
+                },
+                domProps: { value: item.price },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(item, "price", _vm._n($event.target.value))
+                  },
+                  blur: function($event) {
+                    return _vm.$forceUpdate()
+                  }
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "flex flex-col" }, [
+              _c("label", [_vm._v("Ukupna cena preparata:")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model.number",
+                    value: _vm.subtotal[i],
+                    expression: "subtotal[i]",
+                    modifiers: { number: true }
+                  }
+                ],
+                staticClass: "input",
+                attrs: { type: "number", name: "subtotal[]" },
+                domProps: { value: _vm.subtotal[i] },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.subtotal, i, _vm._n($event.target.value))
+                  },
+                  blur: function($event) {
+                    return _vm.$forceUpdate()
+                  }
+                }
+              })
+            ]),
             _vm._v(" "),
             _c(
               "div",
@@ -42651,19 +42846,7 @@ var render = function() {
             )
           ]
         )
-      }),
-      _vm._v(" "),
-      _c("div", { staticClass: "flex justify-end my-10" }, [
-        _c(
-          "a",
-          {
-            staticClass:
-              "btn-confirm text-white flex items-center justify-center cursor-pointer",
-            on: { click: _vm.addItem }
-          },
-          [_vm._v("Novi preparat")]
-        )
-      ])
+      })
     ],
     2
   )
@@ -42673,26 +42856,20 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "flex flex-col" }, [
-      _c("label", [_vm._v("Kolicina:")]),
+    return _c("div", { staticClass: "flex flex-col mb-3" }, [
+      _c("label", [_vm._v("Placeno:")]),
       _vm._v(" "),
-      _c("input", {
-        staticClass: "input",
-        attrs: { type: "number", name: "quantity", placeholder: "Kolicina" }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "flex flex-col" }, [
-      _c("label", [_vm._v("Cena:")]),
-      _vm._v(" "),
-      _c("input", {
-        staticClass: "input",
-        attrs: { type: "number", name: "price", placeholder: "Cena RSD" }
-      })
+      _c("div", [
+        _c("label", { staticClass: "radio" }, [
+          _c("input", { attrs: { type: "radio", name: "payed", value: "1" } }),
+          _vm._v("\n                    Da\n                ")
+        ]),
+        _vm._v(" "),
+        _c("label", { staticClass: "radio" }, [
+          _c("input", { attrs: { type: "radio", name: "payed", value: "0" } }),
+          _vm._v("\n                    Ne\n                ")
+        ])
+      ])
     ])
   }
 ]

@@ -7,6 +7,7 @@ use App\Product;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class OrdersController extends Controller
 {
@@ -14,6 +15,7 @@ class OrdersController extends Controller
     {
 
         $orders = Order::with('products')->get();
+//        $orders = Order::with('products')->where('id', 1)->get();
 //dd($orders);
         return view('orders.index', compact('orders'));
 
@@ -32,19 +34,27 @@ class OrdersController extends Controller
 
     public function store()
     {
-        dd(request()->all());
-        $order = new Order();
+        DB::beginTransaction();
+        try {
+            $order = new Order();
 
-        $order->price_order = request('price_order');
-//        $order->payed = request('payed');
-        $order->note = request('note');
-        $order->user_id = request('user_id');
-        $order->save();
-
-        $order->products()->attach(request('product'), [
-            'quantity' => request('quantity'),
-            'price' => request('price'),
-        ]);
+            $order->price_order = request('price_order');
+            $order->payed = request('payed');
+            $order->note = request('note');
+            $order->user_id = request('user_id');
+            $order->save();
+            for($i = 0; $i<count(request('product')); $i++) {
+                $order->products()->attach(request('product')[$i], [
+                    'quantity' => request('quantity')[$i],
+                    'price' => request('price')[$i],
+                    'subtotal' => request('subtotal')[$i],
+                ]);
+            }
+            DB::commit();
+        } catch (\Exception $exception) {
+            dd($exception->getMessage());
+            DB::rollback();
+        }
 
         return redirect('/orders');
 
@@ -60,14 +70,21 @@ class OrdersController extends Controller
 
     public function edit(Order $order)
     {
-        return view('orders.edit', compact('order'));
+        $order->load('products');
+
+        return view('orders.edit',
+            [
+                'users' => User::all(),
+                'products' => Product::all(),
+            ],
+            compact('order'));
     }
 
     public function update(Request $request, Order $order)
     {
         $order->update(\request(['name', 'description', 'quantity']));
 
-        return redirect('/products');
+        return redirect('/orders');
     }
 
     public function destroy(Order $order)

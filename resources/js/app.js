@@ -9,6 +9,7 @@ require('./bootstrap');
 window.Vue = require('vue');
 
 import InputProduct from "./components/InputProduct";
+import InputProductEdit from "./components/InputProductEdit";
 import Vue from 'vue'
 import VTooltip from 'v-tooltip'
 
@@ -24,6 +25,7 @@ import VTooltip from 'v-tooltip'
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('input-product', InputProduct);
+Vue.component('input-product-edit', InputProductEdit);
 Vue.use(VTooltip)
 
 /**

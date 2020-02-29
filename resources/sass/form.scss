@@ -1,8 +1,7 @@
 .input {
-    width: 220px;
+    width: 200px;
     border: 1px solid $steel;
-    height: 50px;
-    border-radius: 10px;
+    height: 43px;
     text-indent: 20px;
     font-size: 16px;
     line-height: 1.71;
@@ -20,11 +19,10 @@
 }
 
 .input-select {
-    width: 220px;
-    height: 50px;
+    width: 200px;
+    height: 43px;
     padding-left: 20px;
     background-color: $white;
-    border-radius: 10px;
     border: 1px solid $steel;
 
     &:focus {
@@ -35,11 +33,19 @@
 
 .textarea {
     padding: 20px 0 0 20px;
-    border-radius: 10px;
     border: 1px solid $steel;
 
     &:focus {
         border: 1px solid $dark-sky-blue;
         outline: none;
     }
+}
+
+table, th, td {
+    border: 1px solid $steel;
+    padding: 10px;
+}
+
+.payed-true {
+    text-decoration: line-through;
 }

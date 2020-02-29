@@ -15,11 +15,16 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/contact', function () {
+    return view('contact');
+});
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('users', 'UsersController')->middleware('auth');
+Route::get('/users/{user}/pdf', 'PDFController@pdf');
 /*
 Route::get('/users', 'UsersController@index');
 Route::get('/users/create', 'UsersController@create');
