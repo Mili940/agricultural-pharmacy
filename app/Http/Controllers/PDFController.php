@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\App;
 
 class PDFController extends Controller
 {
-    function index()
+    public function index()
     {
         $users = User::all();
 
@@ -19,7 +19,7 @@ class PDFController extends Controller
     }
 
 
-    function pdf($id)
+    public function pdf($id)
     {
         $user = User::with('orders')->find($id);
         $orders = $user->orders;

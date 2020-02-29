@@ -70,7 +70,7 @@ class UsersController extends Controller
     public function update(User $user)
     {
 
-        $user->update(\request(['name', 'last_name', 'phone', 'email', 'password']));
+        $user->update(request(['name', 'last_name', 'phone', 'email', 'password']));
 
         return redirect('/users');
 

@@ -1,5 +1,5 @@
 <h1 class="h1">
-    {{ Auth::user()->name }} {{ Auth::user()->last_name }}
+{{--    {{ $order->user-t t>name }}--}}
 </h1>
 
 <h1 class="h2">Ukupno:</h1>

@@ -70,14 +70,21 @@ class OrdersController extends Controller
 
     public function edit(Order $order)
     {
-        return view('orders.edit', compact('order'));
+        $order->load('products');
+
+        return view('orders.edit',
+            [
+                'users' => User::all(),
+                'products' => Product::all(),
+            ],
+            compact('order'));
     }
 
     public function update(Request $request, Order $order)
     {
         $order->update(\request(['name', 'description', 'quantity']));
 
-        return redirect('/products');
+        return redirect('/orders');
     }
 
     public function destroy(Order $order)

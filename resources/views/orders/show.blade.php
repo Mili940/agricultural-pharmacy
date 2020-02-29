@@ -5,6 +5,9 @@
         <h1 class="h1 my-4">Porudzbina</h1>
         <p class="mr-4">Datuim i vreme kreiranja porudzbine: {{ $order->created_at }}</p>
     </div>
+    <div class="btn-edit mt-4">
+        <a class="flex justify-center" href="/orders/{{ $order->id }}/edit">Edit</a>
+    </div>
     <div class="my-4">
         <p>ID porudzbine: {{ $order->id }}</p>
         <p>Opis prodzbine: {{$order->note}}</p>
