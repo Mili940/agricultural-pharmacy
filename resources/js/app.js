@@ -10,6 +10,7 @@ window.Vue = require('vue');
 
 import InputProduct from "./components/InputProduct";
 import InputProductEdit from "./components/InputProductEdit";
+import WeatherWidget from "./components/WeatherWidget";
 import Vue from 'vue'
 import VTooltip from 'v-tooltip'
 
@@ -26,6 +27,7 @@ import VTooltip from 'v-tooltip'
 
 Vue.component('input-product', InputProduct);
 Vue.component('input-product-edit', InputProductEdit);
+Vue.component('weather-widget', WeatherWidget)
 Vue.use(VTooltip)
 
 /**
